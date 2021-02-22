@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-spring
+  labels:
+    app: session-spring
+spec:
+  # replicas: 1
+  selector:
+    matchLabels:
+      app: session-spring
+  # strategy:
+  #   rollingUpdate:
+  #     maxSurge: 1
+  #     maxUnavailable: 1
+  #   type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: session-spring
+    spec:
+      containers:
+      - name: session-spring
+        image: htdp1/session-spring
+        ports:
+        - containerPort: 8080
+          name: tomcat
+        imagePullPolicy: IfNotPresent
+        # resources:
+        #   limits:
+        #     cpu: 500m
+        #     memory: 512Mi
+        #   requests:
+        #     cpu: 300m
+        #     memory: 256Mi
+        # livenessProbe:
+        #   httpGet:
+        #     path: /liveness
+        #     port: tomcat
+        #   initialDelaySeconds: 5
+        #   periodSeconds: 60
+        # readinessProbe:
+        #   httpGet:
+        #     path: /ready
+        #     port: tomcat
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 5
+      #   volumeMounts:
+      #   - name: application-property
+      #     mountPath: /config
+      # volumes:
+      # - name: application-property
+      #   configMap:
+      #   # Provide the name of the ConfigMap containing the files you want
+      #   # to add to the container
+      #     name: datasource
