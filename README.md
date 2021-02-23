@@ -39,7 +39,11 @@ $ kubectl apply -k ./dev/redis
 https://dev.mysql.com/doc/employee/en/employees-installation.html
 ```
 
-- local에서 접속 시,,
+- local에서 접속 시,, 아래 실행 후, db 접속 프로그램으로 접속 (sequel pro 등)
+```
+kubectl port-forward service/session-mariadb 3305:3306 -n session-dev
+```
+- 혹은 container 실행하여 아래처럼 cli 로 접속
 ```
 kubectl run -it --rm --image=mariadb:latest -n session-dev --restart=Never mysql-client -- mysql -h session-mariadb -pskcc
 ```
