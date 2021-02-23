@@ -12,7 +12,7 @@ $ kubectl apply -k ./dev/redis
 ```
 $ kubectl port-forward service/redis-master 7000:6379
 ```
-- redis-cli 로 접속하여 테스트 한다.
+- local 에서 redis-cli 로 접속하여 테스트 한다.
 ```
 $ redis-cli -p 7000
 127.0.0.1:7000> get mykey
@@ -22,4 +22,8 @@ OK
 127.0.0.1:7000> get mykey
 "myvalue2"
 127.0.0.1:7000> 
+```
+- cluster 내부에서는 아래와 같이 접속한다.
+```
+session-redis.session-dev.svc.cluster.local:6379
 ```
