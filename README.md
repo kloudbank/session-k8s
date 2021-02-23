@@ -1,9 +1,8 @@
 # session-k8s
 session architecture sample application for k8s manifest
 
-
 # session-redis
-- resis 를 배포한다.
+- redis 를 배포한다.
 ```
 $ cd session-k8s
 $ kubectl apply -k ./dev/redis
@@ -27,3 +26,21 @@ OK
 ```
 session-redis.session-dev.svc.cluster.local:6379
 ```
+
+# session-mariadb
+- mariadb 를 배포한다.
+```
+$ cd session-k8s
+$ kubectl apply -k ./dev/redis
+```
+
+- sample data 생성 참조 URL
+```
+https://dev.mysql.com/doc/employee/en/employees-installation.html
+```
+
+- local에서 접속 시,,
+```
+kubectl run -it --rm --image=mariadb:latest -n session-dev --restart=Never mysql-client -- mysql -h session-mariadb -pskcc
+```
+
