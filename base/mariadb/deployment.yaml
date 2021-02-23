@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-mariadb
+spec:
+  selector:
+    matchLabels:
+      app: session-mariadb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: session-mariadb
+    spec:
+      containers:
+      - image: mariadb:latest
+        name: session-mariadb
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: skcc
+        ports:
+        - containerPort: 3306
+          name: session-mariadb
+        imagePullPolicy: IfNotPresent
