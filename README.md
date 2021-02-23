@@ -44,3 +44,25 @@ https://dev.mysql.com/doc/employee/en/employees-installation.html
 kubectl run -it --rm --image=mariadb:latest -n session-dev --restart=Never mysql-client -- mysql -h session-mariadb -pskcc
 ```
 
+- database scheme 확인
+```
+MariaDB [(none)]> use employees;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [employees]> show tables;
++----------------------+
+| Tables_in_employees  |
++----------------------+
+| current_dept_emp     |
+| departments          |
+| dept_emp             |
+| dept_emp_latest_date |
+| dept_manager         |
+| employees            |
+| salaries             |
+| titles               |
++----------------------+
+8 rows in set (0.001 sec)
+```
