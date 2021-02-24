@@ -1,7 +1,6 @@
-application:
-  name: session-spring-dev
-
 spring:
+  application:
+    name: session-spring-dev
   redis:
     host: session-redis.session-dev.svc.cluster.local
     port: 6379
