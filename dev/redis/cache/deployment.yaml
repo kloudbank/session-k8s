@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: session-dev
-  name: session-redis
+  name: redis-cache
   labels:
-    app: session-redis
+    app: redis-cache
 spec:
   replicas: 1
   strategy:
@@ -14,14 +14,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: session-redis
+      app: redis-cache
   template:
     metadata:
       labels:
-        app: session-redis
+        app: redis-cache
     spec:
       containers:
-        - name: session-redis
+        - name: redis-cache
           image: redis:latest
           imagePullPolicy: IfNotPresent
           ports:

@@ -5,11 +5,13 @@ session architecture sample application for k8s manifest
 - redis 를 배포한다.
 ```
 $ cd session-k8s
-$ kubectl apply -k ./dev/redis
+$ kubectl apply -k ./dev/redis/session
+$ kubectl apply -k ./dev/redis/cache
 ```
 - local 에서 redis port 를 연결한다.
 ```
-$ kubectl port-forward service/session-redis 7000:6379
+$ kubectl port-forward service/redis-session 7000:6379
+$ kubectl port-forward service/redis-cache 7001:6379
 ```
 - local 에서 redis-cli 로 접속하여 테스트 한다.
 ```
@@ -24,7 +26,8 @@ OK
 ```
 - cluster 내부에서는 아래와 같이 접속한다.
 ```
-session-redis.session-dev.svc.cluster.local:6379
+redis-session.session-dev.svc.cluster.local:6379
+redis-cache.session-dev.svc.cluster.local:6379
 ```
 
 # session-mariadb

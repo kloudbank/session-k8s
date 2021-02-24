@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: session-dev
 
 bases:
-- ../../base/redis
+- ../../../base/redis/cache
 
 patchesStrategicMerge:
 - deployment.yaml
