@@ -1,7 +1,0 @@
-apiVersion: v1 
-kind: ConfigMap 
-metadata: 
-  name: session-spring
-#data: 
-#  host: session-redis.session-dev.svc.cluster.local
-#  port: 6379
