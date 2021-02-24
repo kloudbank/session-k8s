@@ -22,9 +22,6 @@ spec:
       containers:
       - name: session-spring
         image: htdp1/session-spring:v3
-        env:
-          - name: spring.profiles.active
-            value: dev
         volumeMounts: 
         - name: application-properties
           mountPath: "/config"

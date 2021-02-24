@@ -10,7 +10,6 @@ patchesStrategicMerge:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-- configmap.yaml
 
 configMapGenerator:
 - name: session-spring
