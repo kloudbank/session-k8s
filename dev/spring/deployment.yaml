@@ -25,15 +25,20 @@ spec:
         env:
         - name: spring.profiles.active
           value: dev
+        - name: APPLICATION_NAME
+          valueFrom: 
+            configMapKeyRef:  
+              name: session-spring
+              key: appname
         - name: REDIS_HOST
           valueFrom: 
             configMapKeyRef:  
-              name: redis-configmap
+              name: session-spring
               key: host
         - name: REDIS_PORT
           valueFrom: 
             configMapKeyRef:  
-              name: redis-configmap
+              name: session-spring
               key: port
         resources:
           limits:
