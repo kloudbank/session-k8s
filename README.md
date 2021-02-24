@@ -1,7 +1,7 @@
 # session-k8s
 session architecture sample application for k8s manifest
 
-# session-redis
+# redis container
 - redis 를 배포한다.
 ```
 $ cd session-k8s
@@ -30,7 +30,7 @@ redis-session.session-dev.svc.cluster.local:6379
 redis-cache.session-dev.svc.cluster.local:6379
 ```
 
-# session-mariadb
+# mariadb container
 - mariadb 를 배포한다. (2ea: employees, world)
 ```
 $ cd session-k8s

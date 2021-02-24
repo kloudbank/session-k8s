@@ -13,6 +13,11 @@ patchesStrategicMerge:
 
 configMapGenerator:
 - name: session-spring
-  #behavior: merge
   files:
   - application.yml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+  annotations:
+    note: generated
