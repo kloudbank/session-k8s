@@ -9,7 +9,7 @@ $ kubectl apply -k ./dev/redis
 ```
 - local 에서 redis port 를 연결한다.
 ```
-$ kubectl port-forward service/redis-master 7000:6379
+$ kubectl port-forward service/session-redis 7000:6379
 ```
 - local 에서 redis-cli 로 접속하여 테스트 한다.
 ```
