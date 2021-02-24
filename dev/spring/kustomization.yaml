@@ -11,3 +11,9 @@ patchesStrategicMerge:
 - service.yaml
 - ingress.yaml
 - configmap.yaml
+
+configMapGenerator:
+- name: session-spring
+  behavior: replace
+  files:
+  - application.yml

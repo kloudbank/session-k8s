@@ -23,23 +23,19 @@ spec:
       - name: session-spring
         image: htdp1/session-spring:v3
         env:
-        - name: spring.profiles.active
-          value: dev
-        - name: APPLICATION_NAME
-          valueFrom: 
-            configMapKeyRef:  
-              name: session-spring
-              key: appname
-        - name: REDIS_HOST
-          valueFrom: 
-            configMapKeyRef:  
-              name: session-spring
-              key: host
-        - name: REDIS_PORT
-          valueFrom: 
-            configMapKeyRef:  
-              name: session-spring
-              key: port
+          - name: spring.profiles.active
+            value: dev
+        volumeMounts: 
+        - name: application-properties
+          mountPath: "/config"
+          readOnly: true
+      volumes:
+      - name: application-properties
+        configMap:
+          name: session-spring
+          items:
+          - key: application.yml
+            path: application.yml
         resources:
           limits:
             cpu: 1000m
@@ -59,12 +55,3 @@ spec:
             port: tomcat
           initialDelaySeconds: 30
           periodSeconds: 5
-      #   volumeMounts:
-      #   - name: application-property
-      #     mountPath: /config
-      # volumes:
-      # - name: application-property
-      #   configMap:
-      #   # Provide the name of the ConfigMap containing the files you want
-      #   # to add to the container
-      #     name: datasource
