@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: session-mariadb
+  name: mariadb-world
 spec:
   selector:
     matchLabels:
-      app: session-mariadb
+      app: mariadb-world
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: session-mariadb
+        app: mariadb-world
     spec:
       containers:
       - image: mariadb:latest
-        name: session-mariadb
+        name: mariadb-world
         env:
           # Use secret in real usage
         - name: MYSQL_ROOT_PASSWORD
           value: skcc
         ports:
         - containerPort: 3306
-          name: session-mariadb
+          name: mariadb-world
         imagePullPolicy: IfNotPresent

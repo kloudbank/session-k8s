@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-emp
+spec:
+  selector:
+    matchLabels:
+      app: mariadb-emp
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb-emp
+    spec:
+      containers:
+      - image: mariadb:latest
+        name: mariadb-emp
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: skcc
+        ports:
+        - containerPort: 3306
+          name: mariadb-emp
+        imagePullPolicy: IfNotPresent

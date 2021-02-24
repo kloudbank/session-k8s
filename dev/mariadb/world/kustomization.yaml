@@ -4,15 +4,8 @@ kind: Kustomization
 namespace: session-dev
 
 bases:
-- ../../base/spring
+- ../../../base/mariadb/world
 
 patchesStrategicMerge:
 - deployment.yaml
 - service.yaml
-- ingress.yaml
-
-configMapGenerator:
-- name: session-spring
-  #behavior: merge
-  files:
-  - application.yml

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: session-mariadb
+  name: mariadb-emp
   labels:
-    app: session-mariadb
+    app: mariadb-emp
 spec:
   replicas: 1
   # selector:
   #   matchLabels:
-  #     app: session-mariadb
+  #     app: mariadb-emp
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app: session-mariadb
+        app: mariadb-emp
     spec:
       containers:
-      - name: session-mariadb
+      - name: mariadb-emp
         image: mariadb:latest
         resources:
           limits:
