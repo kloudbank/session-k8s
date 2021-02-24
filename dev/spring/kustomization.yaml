@@ -17,3 +17,10 @@ configMapGenerator:
   files:
   - application.yml
   - application-redis.yml
+  
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+  annotations:
+    note: generated
