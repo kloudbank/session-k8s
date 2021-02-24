@@ -1,0 +1,7 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata: 
+  name: redis-configmap
+data: 
+  host: session-redis.session-dev.svc.cluster.local
+  port: "6379"

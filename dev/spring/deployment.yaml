@@ -21,10 +21,20 @@ spec:
     spec:
       containers:
       - name: session-spring
-        image: htdp1/session-spring:v2
+        image: htdp1/session-spring:v3
         env:
         - name: spring.profiles.active
           value: dev
+        - name: REDIS_HOST
+          valueFrom: 
+            configMapKeyRef:  
+              name: redis-configmap
+              key: host
+        - name: REDIS_PORT
+          valueFrom: 
+            configMapKeyRef:  
+              name: redis-configmap
+              key: port
         resources:
           limits:
             cpu: 1000m
