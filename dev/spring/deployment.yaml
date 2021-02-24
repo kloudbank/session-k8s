@@ -34,13 +34,13 @@ spec:
             memory: 256Mi
         livenessProbe:
           httpGet:
-            path: /liveness
+            path: /
             port: tomcat
           initialDelaySeconds: 5
           periodSeconds: 60
         readinessProbe:
           httpGet:
-            path: /ready
+            path: /
             port: tomcat
           initialDelaySeconds: 30
           periodSeconds: 5
