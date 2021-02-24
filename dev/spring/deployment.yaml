@@ -52,3 +52,5 @@ spec:
           items:
           - key: application.yml
             path: application.yml
+          - key: application-redis.yml
+            path: application-redis.yml

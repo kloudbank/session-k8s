@@ -1,6 +1,8 @@
 spring:
+  config:
+    import: file:./config/application-redis.yml
   application:
     name: session-spring-dev
-  redis:
-    host: session-redis.session-dev.svc.cluster.local
-    port: 6379
+  # redis:
+  #   host: session-redis.session-dev.svc.cluster.local
+  #   port: 6379

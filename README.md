@@ -1,6 +1,11 @@
 # session-k8s
 session architecture sample application for k8s manifest
 
+# deploy k8s from kustomize
+```
+$ kubectl apply -k ./dev/spring
+```
+
 # session-redis
 - redis 를 배포한다.
 ```

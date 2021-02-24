@@ -13,6 +13,7 @@ patchesStrategicMerge:
 
 configMapGenerator:
 - name: session-spring
-  #behavior: merge
+  # behavior: replace
   files:
   - application.yml
+  - application-redis.yml
