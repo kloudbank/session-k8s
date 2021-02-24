@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: session-mariadb
+  name: session-spring
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
@@ -14,5 +14,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: session-mariadb
+          serviceName: session-spring
           servicePort: 80
