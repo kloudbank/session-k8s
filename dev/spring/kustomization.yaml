@@ -17,6 +17,7 @@ configMapGenerator:
   files:
   - application.yml
   - application-redis.yml
+  - application-apis.yml
   
 generatorOptions:
   disableNameSuffixHash: true

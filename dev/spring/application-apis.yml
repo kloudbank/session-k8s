@@ -1,0 +1,3 @@
+rest:
+  apis:
+    userinfo: emp-spring.session-dev.svc.cluster.local

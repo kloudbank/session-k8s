@@ -6,9 +6,9 @@ metadata:
     app: session-spring
 spec:
   replicas: 1
-  # selector:
-  #   matchLabels:
-  #     app: session-spring
+  selector:
+    matchLabels:
+      app: session-spring
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -22,6 +22,10 @@ spec:
       containers:
       - name: session-spring
         image: htdp1/session-spring:v3
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: tomcat
         volumeMounts: 
         - name: application-properties
           mountPath: "/config"
@@ -54,3 +58,5 @@ spec:
             path: application.yml
           - key: application-redis.yml
             path: application-redis.yml
+          - key: application-apis.yml
+            path: application-apis.yml
