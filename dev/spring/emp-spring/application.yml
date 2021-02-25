@@ -1,0 +1,6 @@
+spring:
+  config:
+    import: file:./config/application-mariadb.yml
+  application:
+    name: emp-spring-dev
+

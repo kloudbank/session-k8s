@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: emp-spring
+  labels:
+    app: emp-spring
+spec:
+  replicas: 1
+  # selector:
+  #   matchLabels:
+  #     app: emp-spring
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: emp-spring
+    spec:
+      containers:
+      - name: emp-spring
+        image: htdp1/emp-spring:v1
+        volumeMounts: 
+        - name: application-properties
+          mountPath: "/config"
+          readOnly: true
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: tomcat
+          initialDelaySeconds: 5
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: tomcat
+          initialDelaySeconds: 30
+          periodSeconds: 5
+      volumes:
+      - name: application-properties
+        configMap:
+          name: emp-spring
+          items:
+          - key: application.yml
+            path: application.yml
+          - key: application-mariadb.yml
+            path: application-mariadb.yml

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: emp-spring
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: tomcat
+  selector:
+    app: emp-spring
