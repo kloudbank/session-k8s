@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: emp-spring
-        image: htdp1/emp-spring:v1
+        image: htdp1/emp-spring:v2
         volumeMounts: 
         - name: application-properties
           mountPath: "/config"
