@@ -1,5 +1,5 @@
 spring:
   config:
     import: 
-    - file:./config/application-redis.yml
     - file:./config/application-apis.yml
+    - file:./config/application-redis.yml

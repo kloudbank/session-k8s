@@ -1,3 +1,2 @@
-rest:
-  apis:
-    userinfo: emp-spring.session-dev.svc.cluster.local
+apis:
+  userinfo: http://emp-spring.session-dev.svc.cluster.local/test/

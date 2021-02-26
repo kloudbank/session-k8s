@@ -1,4 +1,16 @@
-spring:
+spring: 
+  session:
+    store-type: redis
+    redis:
+      flush-mode: on-save
+      namespace: spring:session
   redis:
     host: redis-session.session-dev.svc.cluster.local
     port: 6379
+    password: 
+  cache: 
+    type: redis
+    redis:
+      host: redis-cache.session-dev.svc.cluster.local
+      port: 6379
+      password: 
