@@ -21,20 +21,27 @@ spec:
         app: redis-cache
     spec:
       containers:
-        - name: redis-cache
-          image: redis:latest
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 6379
-          env:
-            # - name: ALLOW_EMPTY_PASSWORD
-            #   value: "yes"
-            - name: REDIS_PASSWORD
-              value: Password12#$
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 300m
-              memory: 256Mi
+      - name: redis-cache
+        image: redis:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6379
+        env:
+          # - name: ALLOW_EMPTY_PASSWORD
+          #   value: "yes"
+          - name: REDIS_PASSWORD
+            value: Password12#$
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /data
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: redis-cache
