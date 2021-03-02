@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngrinder-agent
+spec:
+  selector:
+    matchLabels:
+      app: ngrinder-agent
+  strategy:
+    type: Recreate
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ngrinder-agent
+    spec:
+      containers:
+      - image: ngrinder/agent:latest
+        name: ngrinder-agent
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 1600m
+            memory: 1024Mi
+          requests:
+            cpu: 300m
+            memory: 512Mi
+        args: [ngrinder-controller.session-dev.svc.cluster.local:80]
