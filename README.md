@@ -102,3 +102,17 @@ MariaDB [world]> show tables;
 +-----------------+
 3 rows in set (0.001 sec)
 ```
+
+# nGrinder container
+
+- nGrinder 를 배포한다. (Controller / Agent)
+```
+$ cd session-k8s
+$ kubectl apply -k ./dev/ngrinder/controller
+$ kubectl apply -k ./dev/ngrinder/agent
+```
+
+- agent와 controller가 통신할 수 있도록, controller k8s Service 로 실행 args 전달
+```
+args: [ngrinder-controller.session-dev.svc.cluster.local:80]
+```
