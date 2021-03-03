@@ -1,0 +1,26 @@
+spring: 
+  session:
+    store-type: redis
+    redis:
+      namespace: "htdp1:session"
+      host: redis-session.session-dev.svc.cluster.local
+      port: 6379
+      password: 
+
+  cache: 
+    type: redis
+    redis:
+      namespace: "htdp1:cache:"
+      ttl: 1 # min
+      host: redis-cache.session-dev.svc.cluster.local
+      port: 6379
+      password:
+      
+  repository: 
+    type: redis
+    redis:
+      namespace: ""
+      host: redis-cache.session-dev.svc.cluster.local
+      port: 6379
+      password:
+    
