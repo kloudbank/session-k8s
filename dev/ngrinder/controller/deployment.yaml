@@ -37,6 +37,13 @@ spec:
           requests:
             cpu: 800m
             memory: 512Mi
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /opt/ngrinder-controller
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: ngrinder-controller
       hostAliases:
       - ip: "52.79.81.6"
         hostnames:

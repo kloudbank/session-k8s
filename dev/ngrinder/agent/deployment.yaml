@@ -26,6 +26,13 @@ spec:
             cpu: 300m
             memory: 512Mi
         args: [ngrinder-controller.session-dev.svc.cluster.local:80]
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /opt/ngrinder-agent
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: ngrinder-agent
       hostAliases:
       - ip: "52.79.81.6"
         hostnames:
