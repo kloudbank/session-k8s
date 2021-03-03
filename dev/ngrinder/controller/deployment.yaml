@@ -37,3 +37,10 @@ spec:
           requests:
             cpu: 800m
             memory: 512Mi
+      hostAliases:
+      - ip: "52.79.81.6"
+        hostnames:
+        - "k8s-sessiond-sessions-3ae919bacd-1173638282.ap-northeast-2.elb.amazonaws.com"
+      - ip: "13.124.186.175"
+        hostnames:
+        - "k8s-sessiond-empsprin-eddc7b7a44-95816314.ap-northeast-2.elb.amazonaws.com"
