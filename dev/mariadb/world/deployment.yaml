@@ -24,8 +24,8 @@ spec:
         image: mariadb:latest
         resources:
           limits:
-            cpu: 2000m
+            cpu: 1000m
             memory: 1024Mi
           requests:
-            cpu: 1000m
+            cpu: 300m
             memory: 512Mi
