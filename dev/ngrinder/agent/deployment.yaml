@@ -8,7 +8,7 @@ spec:
       app: ngrinder-agent
   strategy:
     type: Recreate
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -20,10 +20,10 @@ spec:
         imagePullPolicy: IfNotPresent
         resources:
           limits:
-            cpu: 1600m
+            cpu: 3000m
             memory: 1024Mi
           requests:
-            cpu: 300m
+            cpu: 500m
             memory: 512Mi
         args: [ngrinder-controller.session-dev.svc.cluster.local:80]
         volumeMounts:
@@ -33,10 +33,3 @@ spec:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: ngrinder-agent
-      hostAliases:
-      - ip: "52.79.81.6"
-        hostnames:
-        - "k8s-sessiond-sessions-3ae919bacd-1173638282.ap-northeast-2.elb.amazonaws.com"
-      - ip: "13.124.186.175"
-        hostnames:
-        - "k8s-sessiond-empsprin-eddc7b7a44-95816314.ap-northeast-2.elb.amazonaws.com"
