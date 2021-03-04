@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dept-spring
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: dept-spring
@@ -32,20 +32,20 @@ spec:
           readOnly: true
         resources:
           limits:
-            cpu: 1000m
+            cpu: 2000m
             memory: 512Mi
           requests:
-            cpu: 300m
+            cpu: 500m
             memory: 256Mi
         livenessProbe:
           httpGet:
-            path: /actuator/health
+            path: /actuator/info
             port: tomcat
           initialDelaySeconds: 5
           periodSeconds: 60
         readinessProbe:
           httpGet:
-            path: /actuator/health
+            path: /actuator/info
             port: tomcat
           initialDelaySeconds: 30
           periodSeconds: 5
