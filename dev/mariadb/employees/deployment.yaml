@@ -21,11 +21,15 @@ spec:
     spec:
       containers:
       - name: mariadb-emp
-        image: mariadb:latest
+        image: htdp1/mariadb-emp:latest
         resources:
           limits:
-            cpu: 2000m
+            cpu: 1000m
             memory: 1024Mi
           requests:
-            cpu: 1000m
+            cpu: 500m
             memory: 512Mi
+        env:
+          # Use secret in real usage
+        - name: MYSQL_ROOT_PASSWORD
+          value: skcc
