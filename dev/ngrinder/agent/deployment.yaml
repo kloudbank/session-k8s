@@ -8,7 +8,7 @@ spec:
       app: ngrinder-agent
   strategy:
     type: Recreate
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: IfNotPresent
         resources:
           limits:
-            cpu: 3000m
+            cpu: 2000m
             memory: 1024Mi
           requests:
             cpu: 500m
