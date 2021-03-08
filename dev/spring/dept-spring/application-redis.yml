@@ -23,4 +23,6 @@ spring:
       host: redis-cache.session-dev.svc.cluster.local
       port: 6379
       password:
-    
+
+session:
+  enabled: false
