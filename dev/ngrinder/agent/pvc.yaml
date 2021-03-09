@@ -2,7 +2,22 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: session-dev
-  name: ngrinder-agent
+  name: ngrinder-agent1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc
+  resources:
+    requests:
+      storage: 4Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: session-dev
+  name: ngrinder-agent2
 spec:
   accessModes:
     - ReadWriteOnce

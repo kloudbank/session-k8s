@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ngrinder-agent
+  name: ngrinder-agent1
 spec:
   selector:
     matchLabels:
-      app: ngrinder-agent
+      app: ngrinder-agent1
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: ngrinder-agent
+        app: ngrinder-agent1
     spec:
       containers:
-      - image: ngrinder/controller:latest
-        name: ngrinder-agent
+      - image: ngrinder/agent:latest
+        name: ngrinder-agent1
         ports:
         - containerPort: 80
         - containerPort: 16001
