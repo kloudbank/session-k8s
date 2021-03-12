@@ -14,7 +14,7 @@ spec:
         app: mariadb-emp
     spec:
       containers:
-      - image: mariadb:latest
+      - image: htdp1/mariadb:latest
         name: mariadb-emp
         env:
           # Use secret in real usage

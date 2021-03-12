@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: mariadb-emp
-        image: htdp1/mariadb-emp:latest
+        image: htdp1/mariadb-emp:v1
         resources:
           limits:
             cpu: 1000m
