@@ -26,7 +26,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 6379
-        command: ["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+        command: #["redis-server", "--appendonly", "yes", "--appendfsync", "everysec"]
+          - redis-server
+          - "/redis-master/redis.conf"
         env:
           # - name: ALLOW_EMPTY_PASSWORD
           #   value: "yes"
@@ -42,7 +44,15 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
+        - name: config
+          mountPath: /redis-master
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-aof
+      - name: config
+        configMap:
+          name: redis-cache-aof
+          items:
+          - key: redis.conf
+            path: redis.conf

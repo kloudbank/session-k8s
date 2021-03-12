@@ -9,3 +9,16 @@ bases:
 patchesStrategicMerge:
 - deployment.yaml
 - service.yaml
+
+configMapGenerator:
+- name: redis-cache-always
+  # behavior: replace
+  files:
+  - redis.conf
+  
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+  annotations:
+    note: generated
