@@ -275,7 +275,7 @@
 		"stack": false,
 		"steppedLine": false,
 		"targets": [{
-			"expr": "sum (rate (container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"$pod\", image!=\"\"}[2m])) by (pod) * 100",
+			"expr": "sum (rate (container_cpu_usage_seconds_total{namespace=~\"$namespace\", pod=~\"$pod\", image!=\"\"}[2m])) by (pod) * 1000",
 			"interval": "",
 			"legendFormat": "{{pod}}",
 			"refId": "A"
@@ -284,7 +284,7 @@
 		"timeFrom": null,
 		"timeRegions": [],
 		"timeShift": null,
-		"title": "CPU Utilization",
+		"title": "CPU Usage",
 		"tooltip": {
 			"shared": true,
 			"sort": 0,
@@ -299,7 +299,7 @@
 			"values": []
 		},
 		"yaxes": [{
-			"format": "percent",
+			"format": "",
 			"label": null,
 			"logBase": 1,
 			"max": null,
