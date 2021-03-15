@@ -1,6 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 spring:
   config:
-    import: file:./config/application-mariadb.yml
+    import: 
+    - file:./config/application-mariadb.yml
   application:
-    name: emp-spring-dev
+    name: emp-spring
+  data:
+    rest:
+      basePath: /api
 
+logging:
+  level:
+    '[com.htdp1.empspring]': debug

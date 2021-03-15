@@ -6,9 +6,9 @@ metadata:
     app: emp-spring
 spec:
   replicas: 1
-  # selector:
-  #   matchLabels:
-  #     app: emp-spring
+  selector:
+    matchLabels:
+      app: emp-spring
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -22,6 +22,10 @@ spec:
       containers:
       - name: emp-spring
         image: htdp1/emp-spring:v4
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: tomcat
         volumeMounts: 
         - name: application-properties
           mountPath: "/config"
@@ -35,13 +39,13 @@ spec:
             memory: 256Mi
         livenessProbe:
           httpGet:
-            path: /actuator/health
+            path: /actuator/info
             port: tomcat
           initialDelaySeconds: 5
           periodSeconds: 60
         readinessProbe:
           httpGet:
-            path: /actuator/health
+            path: /actuator/info
             port: tomcat
           initialDelaySeconds: 30
           periodSeconds: 5

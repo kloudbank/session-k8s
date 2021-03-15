@@ -13,7 +13,6 @@ patchesStrategicMerge:
 
 configMapGenerator:
 - name: emp-spring
-  # behavior: replace
   files:
   - application.yml
   - application-mariadb.yml
