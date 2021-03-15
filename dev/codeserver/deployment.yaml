@@ -20,15 +20,15 @@ spec:
         app: code-server
     spec:
       containers:
-      - image: linuxserver/code-server:latest
+      - image: htdp1/code-server:latest
         name: code-server
         imagePullPolicy: Always
         ports:
         - containerPort: 8443
         resources:
           limits:
-            cpu: 1000m
-            memory: 1024Mi
+            cpu: 2000m
+            memory: 2048Mi
           requests:
             cpu: 500m
             memory: 512Mi
