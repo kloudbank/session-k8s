@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+  labels:
+    app: code-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+      - image: linuxserver/code-server:latest
+        name: code-server
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8443
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        env:
+        - name: TZ
+          value: Asia/Seoul
+        - name: PASSWORD
+          value: skcc
+        - name: SUDO_PASSWORD
+          value: skcc
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /config
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: code-server
