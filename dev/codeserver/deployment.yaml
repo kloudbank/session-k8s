@@ -35,10 +35,16 @@ spec:
         env:
         - name: TZ
           value: Asia/Seoul
-        - name: PASSWORD
-          value: skcc
-        - name: SUDO_PASSWORD
-          value: skcc
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: HASHED_PASSWORD
+          value: bba82ecffbd1b927c87f5b26df56b51f2e34520d4e22ab7c9aa2c6e0eb406b2f
+          # printf "password" | sha256sum | cut -d' ' -f1
+        - name: SUDO_PASSWORD_HASH
+          value: bba82ecffbd1b927c87f5b26df56b51f2e34520d4e22ab7c9aa2c6e0eb406b2f
+          # printf "password" | sha256sum | cut -d' ' -f1
         volumeMounts:
         - name: persistent-storage
           mountPath: /config

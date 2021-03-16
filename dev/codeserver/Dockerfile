@@ -18,3 +18,9 @@ RUN sudo apt-get install -y kubectl
 
 # Kustomize
 RUN curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
+
+# aws cli
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+RUN sudo apt-get install -y unzip
+RUN unzip awscliv2.zip
+RUN sudo ./aws/install
