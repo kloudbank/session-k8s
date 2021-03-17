@@ -24,3 +24,12 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN sudo apt-get install -y unzip
 RUN unzip awscliv2.zip
 RUN sudo ./aws/install
+
+# chrome
+RUN curl -s https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+RUN sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+RUN sudo apt-get update
+RUN sudo apt-get install -y google-chrome-stable
+RUN ls /etc/apt/sources.list.d/google*
+RUN sudo rm -rf /etc/apt/sources.list.d/google.list
+
