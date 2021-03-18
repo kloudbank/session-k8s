@@ -3,7 +3,7 @@ spring:
     store-type: redis
     redis:
       namespace: "htdp1:session"
-      host: redis-session.session-dev.svc.cluster.local
+      host: redis-session.session-dev
       port: 6379
       password: 
 
@@ -12,7 +12,7 @@ spring:
     redis:
       namespace: "htdp1:cache:"
       ttl: 10 # min
-      host: redis-cache.session-dev.svc.cluster.local
+      host: redis-cache.session-dev
       port: 6379
       password:
       
@@ -20,9 +20,6 @@ spring:
     type: redis
     redis:
       namespace: ""
-      host: redis-cache.session-dev.svc.cluster.local
+      host: redis-cache.session-dev
       port: 6379
       password:
-
-session:
-  enabled: false

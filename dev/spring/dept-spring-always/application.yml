@@ -23,4 +23,14 @@ spring:
 
 logging:
   level:
-    '[com.htdp1.deptspring]': debug
+    root: warn                            # all logging
+    '[com.htdp1.deptspring]': debug       # Application logging
+    '[org.springframework.cache]': trace  # @Cacheable logging
+    '[org.springframework.data]': trace   # JPA logging
+    '[org.hibernate.SQL]': debug          # print JPA SQL 
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': trace # pring JPA SQL Parameters
+
+### user defined ###
+session:
+  enabled: false
+

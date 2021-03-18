@@ -1,26 +1,43 @@
 server:
   port: 8080
   servlet:
-    context-path: /dept-spring
+    context-path: /dept-spring 
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
-
+        include: "*" # acturator
+      
 spring:
+  application:
+    name: dept-spring
+    
   config:
     import: 
     - file:./config/application-apis.yml
-    - file:./config/application-redis.yml
     - file:./config/application-mariadb.yml
-  application:
-    name: dept-spring
+    - file:./config/application-redis.yml
+  
   data:
     rest:
-      basePath: /api
-
+      basePath: /api # spring-data-rest-webmvc base path
+  
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true # print JPA formated sql 
+  
 logging:
   level:
-    '[com.htdp1.deptspring]': debug
+    root: warn                            # all logging
+    '[com.htdp1.deptspring]': debug       # Application logging
+    '[org.springframework.cache]': trace  # @Cacheable logging
+    '[org.springframework.data]': trace   # JPA logging
+    '[org.hibernate.SQL]': debug          # print JPA SQL 
+    '[org.hibernate.type.descriptor.sql.BasicBinder]': trace # pring JPA SQL Parameters
+
+### user defined ###
+session:
+  enabled: false
+
