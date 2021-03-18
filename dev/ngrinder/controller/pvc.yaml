@@ -5,8 +5,8 @@ metadata:
   name: ngrinder-controller
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: ebs-sc
+    - ReadWriteMany
+  storageClassName: efs-sc
   resources:
     requests:
       storage: 4Gi
