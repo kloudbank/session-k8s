@@ -11,3 +11,15 @@ patchesStrategicMerge:
 - service.yaml
 - multiple-service.yaml
 
+configMapGenerator:
+- name: redis-cache-001
+  # behavior: replace
+  files:
+  - envoy.yaml
+  
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    type: generated
+  annotations:
+    note: generated

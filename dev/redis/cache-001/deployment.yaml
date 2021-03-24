@@ -42,7 +42,31 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
+      - name: sidecar-proxy
+        image: envoyproxy/envoy-dev:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6380
+            name: redis
+          - containerPort: 8001
+            name: admin
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - name: config
+          mountPath: /etc/envoy
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-001
+      - name: config
+        configMap:
+          name: redis-cache-001
+          items:
+          - key: envoy.yaml
+            path: envoy.yaml

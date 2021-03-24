@@ -11,6 +11,13 @@ spec:
   ports:
     - port: 6379
       targetPort: 6379
+      name: redis-cache
+    - port: 6380
+      targetPort: 6380
+      name: redis-proxy
+    - port: 8001
+      targetPort: 8001
+      name: envoy-admin
   selector:
     #app: redis-cache
     component: redis
