@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: session-dev
-  name: redis-cache
+  name: redis-cache-001
   labels:
-    app: redis-cache
+    app: redis-cache-001
 spec:
   replicas: 1
   strategy:
@@ -14,15 +14,15 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: redis-cache
+      app: redis-cache-001
   template:
     metadata:
       labels:
-        app: redis-cache
+        app: redis-cache-001
         component: redis
     spec:
       containers:
-      - name: redis-cache
+      - name: redis-cache-001
         image: redis:latest
         imagePullPolicy: IfNotPresent
         ports:
@@ -45,4 +45,4 @@ spec:
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
-          claimName: redis-cache
+          claimName: redis-cache-001

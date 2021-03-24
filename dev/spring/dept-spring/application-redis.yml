@@ -12,7 +12,7 @@ spring:
     redis:
       namespace: "htdp1:cache:"
       ttl: 10 # min
-      host: redis-cache.session-dev
+      host: redis-common.session-dev
       port: 6379
       password:
       
@@ -20,6 +20,6 @@ spring:
     type: redis
     redis:
       namespace: ""
-      host: redis-cache.session-dev
+      host: redis-common.session-dev
       port: 6379
       password:

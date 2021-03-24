@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: session-dev
+  name: redis-cache-002
+  labels:
+    app: redis-cache-002
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: redis-cache-002
+  template:
+    metadata:
+      labels:
+        app: redis-cache-002
+    spec:
+      containers:
+        - name: redis-cache-002
+          image: redis:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+          env:
+            # - name: ALLOW_EMPTY_PASSWORD
+            #   value: "yes"
+            - name: REDIS_PASSWORD
+              value: Password12#$
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 300m
+              memory: 256Mi
