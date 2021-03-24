@@ -3,17 +3,21 @@ kind: Ingress
 metadata:
   name: dept-spring
   annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/subnets: subnet-0234dcaa80edc39d3,subnet-07ba2270e41ad9860
-    alb.ingress.kubernetes.io/security-groups: sg-06e7915929b6a7672
-    alb.ingress.kubernetes.io/group.name: spring
+    #kubernetes.io/ingress.class: alb
+    #alb.ingress.kubernetes.io/scheme: internet-facing
+    #alb.ingress.kubernetes.io/target-type: ip
+    #alb.ingress.kubernetes.io/subnets: subnet-0234dcaa80edc39d3,subnet-07ba2270e41ad9860
+    #alb.ingress.kubernetes.io/security-groups: sg-06e7915929b6a7672
+    #alb.ingress.kubernetes.io/group.name: spring
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-  - http:
+  - host: htdp1.kubepia.net
+    http:
       paths:
-      - path: /dept-spring*
+      - path: /dept-spring
         backend:
           serviceName: dept-spring
           servicePort: 80
