@@ -16,14 +16,14 @@ static_resources:
             enable_redirection: true
           prefix_routes:
             catch_all_route:
-              cluster: redis_cluster
+              cluster: redis_standalone
   clusters:
-  - name: redis_cluster
+  - name: redis_standalone
     connect_timeout: 1s
     type: STRICT_DNS # static
-    lb_policy: MAGLEV
+    #lb_policy: MAGLEV
     load_assignment:
-      cluster_name: redis_cluster
+      cluster_name: redis_standalone
       endpoints:
       - lb_endpoints:
         - endpoint:

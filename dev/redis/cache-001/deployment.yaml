@@ -27,6 +27,9 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 6379
+        command: 
+          - redis-server
+          - "/redis-master/redis.conf"
         env:
           # - name: ALLOW_EMPTY_PASSWORD
           #   value: "yes"
@@ -42,14 +45,35 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
-      - name: sidecar-proxy
-        image: envoyproxy/envoy-dev:latest
+        - name: config
+          mountPath: /redis-master
+      #- name: sidecar-proxy
+      #  image: envoyproxy/envoy-dev:latest
+      #  imagePullPolicy: IfNotPresent
+      #  ports:
+      #    - containerPort: 6381
+      #      name: envoy
+      #    - containerPort: 8001
+      #      name: admin
+      #  resources:
+      #    limits:
+      #      cpu: 500m
+      #      memory: 512Mi
+      #    requests:
+      #      cpu: 200m
+      #      memory: 256Mi
+      #  volumeMounts:
+      #  - name: envoy-config
+      #    mountPath: /etc/envoy
+      - name: predixy
+        image: htdp1/predixy:v2
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 6380
-            name: redis
-          - containerPort: 8001
-            name: admin
+            name: predixy
+        command: 
+          - /usr/local/bin/predixy
+          - "/etc/predixy/conf/predixy.conf"
         resources:
           limits:
             cpu: 500m
@@ -58,8 +82,8 @@ spec:
             cpu: 200m
             memory: 256Mi
         volumeMounts:
-        - name: config
-          mountPath: /etc/envoy
+        - name: predixy-config
+          mountPath: /etc/predixy/conf
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
@@ -68,5 +92,21 @@ spec:
         configMap:
           name: redis-cache-001
           items:
+          - key: redis.conf
+            path: redis.conf
+      - name: envoy-config
+        configMap:
+          name: redis-cache-001-envoy
+          items:
           - key: envoy.yaml
             path: envoy.yaml
+      - name: predixy-config
+        configMap:
+          name: redis-cache-001-predixy
+          items:
+          - key: predixy.conf
+            path: predixy.conf
+          - key: standalone.conf
+            path: standalone.conf
+          - key: command.conf
+            path: command.conf

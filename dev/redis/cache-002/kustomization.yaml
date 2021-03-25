@@ -13,9 +13,16 @@ patchesStrategicMerge:
 
 configMapGenerator:
 - name: redis-cache-002
-  # behavior: replace
   files:
-  - envoy.yaml
+  - redis.conf
+#- name: redis-cache-002-envoy
+#  files:
+#  - envoy.yaml
+- name: redis-cache-002-predixy
+  files:
+  - predixy/predixy.conf
+  - predixy/standalone.conf
+  - predixy/command.conf
   
 generatorOptions:
   disableNameSuffixHash: true
