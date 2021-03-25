@@ -84,10 +84,15 @@ spec:
         volumeMounts:
         - name: predixy-config
           mountPath: /etc/predixy/conf
+        - name: shared-storage
+          mountPath: /data
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-001
+      - name: shared-storage
+        persistentVolumeClaim:
+          claimName: predixy
       - name: config
         configMap:
           name: redis-cache-001
