@@ -15,9 +15,9 @@ configMapGenerator:
 - name: redis-cache-002
   files:
   - redis.conf
-#- name: redis-cache-002-envoy
-#  files:
-#  - envoy.yaml
+- name: redis-cache-002-envoy
+  files:
+  - envoy.yaml
 - name: redis-cache-002-predixy
   files:
   - predixy/predixy.conf

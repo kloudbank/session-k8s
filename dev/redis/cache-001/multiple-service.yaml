@@ -13,7 +13,7 @@ spec:
       targetPort: 6379
       name: redis-cache
     - port: 6380
-      targetPort: predixy
+      targetPort: 6380
       name: redis-proxy
   selector:
     #app: redis-cache

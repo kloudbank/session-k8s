@@ -45,6 +45,8 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
+        - name: shared-storage
+          mountPath: /data/bck
         - name: config
           mountPath: /redis-master
       #- name: sidecar-proxy
@@ -65,27 +67,27 @@ spec:
       #  volumeMounts:
       #  - name: envoy-config
       #    mountPath: /etc/envoy
-      - name: predixy
-        image: htdp1/predixy:v2
-        imagePullPolicy: IfNotPresent
-        ports:
-          - containerPort: 6380
-            name: predixy
-        command: 
-          - /usr/local/bin/predixy
-          - "/etc/predixy/conf/predixy.conf"
-        resources:
-          limits:
-            cpu: 500m
-            memory: 512Mi
-          requests:
-            cpu: 200m
-            memory: 256Mi
-        volumeMounts:
-        - name: predixy-config
-          mountPath: /etc/predixy/conf
-        - name: shared-storage
-          mountPath: /data
+      #- name: predixy
+      #  image: htdp1/predixy:v2
+      #  imagePullPolicy: IfNotPresent
+      #  ports:
+      #    - containerPort: 6380
+      #      name: predixy
+      #  command: 
+      #    - /usr/local/bin/predixy
+      #    - "/etc/predixy/conf/predixy.conf"
+      #  resources:
+      #    limits:
+      #      cpu: 500m
+      #      memory: 512Mi
+      #    requests:
+      #      cpu: 200m
+      #      memory: 256Mi
+      #  volumeMounts:
+      #  - name: predixy-config
+      #    mountPath: /etc/predixy/conf
+      #  - name: shared-storage
+      #    mountPath: /data
       volumes:
       - name: persistent-storage
         persistentVolumeClaim:
