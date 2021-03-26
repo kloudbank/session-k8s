@@ -19,14 +19,19 @@ spec:
     metadata:
       labels:
         app: redis-cache-002
-        component: redis
+        component: redisss
     spec:
       containers:
       - name: redis-cache-002
         image: redis:latest
         imagePullPolicy: IfNotPresent
         ports:
-          - containerPort: 6379
+          - containerPort: 8101
+            name: dyno
+          - containerPort: 8102
+            name: dyno-client
+          - containerPort: 22222
+            name: dyno-admin
         command: 
           - redis-server
           - "/redis-master/redis.conf"
@@ -49,6 +54,25 @@ spec:
           mountPath: /data/bck
         - name: config
           mountPath: /redis-master
+      - name: dynomite
+        image: dynomitedb/dynomite
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8101
+            name: dyno
+          - containerPort: 8102
+            name: dyno-client
+          - containerPort: 22222
+            name: dyno-admin
+        #command: 
+        #  - /dynomite/startup.sh
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
       #- name: sidecar-proxy
       #  image: envoyproxy/envoy-dev:latest
       #  imagePullPolicy: IfNotPresent
