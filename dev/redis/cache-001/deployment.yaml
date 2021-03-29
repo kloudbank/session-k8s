@@ -116,36 +116,17 @@ spec:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-001
-      - name: shared-storage
-        persistentVolumeClaim:
-          claimName: predixy
       - name: config
         configMap:
           name: redis-cache-001
           items:
           - key: redis.conf
             path: redis.conf
-      - name: envoy-config
-        configMap:
-          name: redis-cache-001-envoy
-          items:
-          - key: envoy.yaml
-            path: envoy.yaml
-      - name: predixy-config
-        configMap:
-          name: redis-cache-001-predixy
-          items:
-          - key: predixy.conf
-            path: predixy.conf
-          - key: standalone.conf
-            path: standalone.conf
-          - key: command.conf
-            path: command.conf
-      - name: dyno-config
-        configMap:
-          name: redis-cache-001-dyno
-          items:
-          - key: dynomite.yaml
-            path: dynomite.yaml
-          - key: dynomite.pem
-            path: dynomite.pem
+      #- name: dyno-config
+      #  configMap:
+      #    name: redis-cache-001-dyno
+      #    items:
+      #    - key: dynomite.yaml
+      #      path: dynomite.yaml
+      #    - key: dynomite.pem
+      #      path: dynomite.pem

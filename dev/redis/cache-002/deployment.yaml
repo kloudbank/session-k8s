@@ -50,8 +50,6 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
-        #- name: shared-storage
-        #  mountPath: /data/bck
         - name: config
           mountPath: /redis-master
       - name: dynomite
@@ -115,28 +113,17 @@ spec:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-002
-      - name: shared-storage
-        persistentVolumeClaim:
-          claimName: predixy
       - name: config
         configMap:
           name: redis-cache-002
           items:
           - key: redis.conf
             path: redis.conf
-      - name: envoy-config
-        configMap:
-          name: redis-cache-002-envoy
-          items:
-          - key: envoy.yaml
-            path: envoy.yaml
-      - name: predixy-config
-        configMap:
-          name: redis-cache-002-predixy
-          items:
-          - key: predixy.conf
-            path: predixy.conf
-          - key: standalone.conf
-            path: standalone.conf
-          - key: command.conf
-            path: command.conf
+      #- name: dyno-config
+      #  configMap:
+      #    name: redis-cache-002-dyno
+      #    items:
+      #    - key: dynomite.yaml
+      #      path: dynomite.yaml
+      #    - key: dynomite.pem
+      #      path: dynomite.pem
