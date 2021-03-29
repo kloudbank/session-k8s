@@ -7,15 +7,15 @@ metadata:
     app: redis-cache-002
 spec:
   ports:
-    - port: 6379
-      targetPort: 6379
-      name: redis-cache
     - port: 8101
       targetPort: dyno
       name: dyno
     - port: 8102
       targetPort: dyno-client
       name: dyno-client
+    - port: 6379
+      targetPort: 6379
+      name: redis-cache
     - port: 22222
       targetPort: dyno-admin
       name: dyno-admin

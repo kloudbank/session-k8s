@@ -1,0 +1,10 @@
+dyn_o_mite:
+  dyn_listen: 127.0.0.1:8101
+  listen: 127.0.0.1:8102
+  dyn_seed_provider: simple_provider
+  servers:
+  - redis-cache-001:6379:1
+  tokens: 0
+  data_store: 0
+  #stats_listen: 0.0.0.0:22222
+  pem_key_file: /etc/dynomitedb/dynomite.pem

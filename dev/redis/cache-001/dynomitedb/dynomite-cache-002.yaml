@@ -1,0 +1,16 @@
+dyn_o_mite:
+  datacenter: dc2
+  rack: rack2
+  dyn_listen: 0.0.0.0:8101
+  listen: 0.0.0.0:8102
+  dyn_seeds:
+  - redis-cache-001:8101:rack1:dc1:0
+  servers:
+  - 127.0.0.1:6379:1
+  tokens: '0'
+  data_store: 0
+  pem_key_file: /etc/dynomitedb/dynomite.pem
+  #stats_listen: 0.0.0.0:22222
+  secure_server_option: datacenter
+  read_consistency: DC_QUORUM
+  write_consistency: DC_QUORUM

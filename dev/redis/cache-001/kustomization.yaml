@@ -25,7 +25,8 @@ configMapGenerator:
   - predixy/command.conf
 - name: redis-cache-001-dyno
   files:
-  - dynomite/dynomite.yaml
+  - dynomitedb/dynomite.yaml
+  - dynomitedb/dynomite.pem
   
 generatorOptions:
   disableNameSuffixHash: true

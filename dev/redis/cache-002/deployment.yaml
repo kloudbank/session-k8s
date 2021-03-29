@@ -19,7 +19,7 @@ spec:
     metadata:
       labels:
         app: redis-cache-002
-        component: redisss
+        component: redis
     spec:
       containers:
       - name: redis-cache-002
@@ -50,12 +50,12 @@ spec:
         volumeMounts:
         - name: persistent-storage
           mountPath: /data
-        - name: shared-storage
-          mountPath: /data/bck
+        #- name: shared-storage
+        #  mountPath: /data/bck
         - name: config
           mountPath: /redis-master
       - name: dynomite
-        image: dynomitedb/dynomite
+        image: htdp1/dynomite:v8
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8101
@@ -64,8 +64,7 @@ spec:
             name: dyno-client
           - containerPort: 22222
             name: dyno-admin
-        #command: 
-        #  - /dynomite/startup.sh
+        args: ["dynomite", "-c", "/etc/dynomitedb/dynomite-cache-002.yaml"]
         resources:
           limits:
             cpu: 500m
