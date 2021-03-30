@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: dept-spring
-        image: htdp1/dept-spring:v1
+        image: htdp1/dept-spring:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
