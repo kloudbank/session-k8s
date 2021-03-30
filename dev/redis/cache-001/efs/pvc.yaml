@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: session-dev
-  name: predixy
+  name: redis-nfs
 spec:
   accessModes:
     - ReadWriteMany

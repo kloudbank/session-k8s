@@ -18,15 +18,9 @@ configMapGenerator:
 #- name: redis-cache-002-envoy
 #  files:
 #  - envoy.yaml
-#- name: redis-cache-002-predixy
-#  files:
-#  - predixy/predixy.conf
-#  - predixy/standalone.conf
-#  - predixy/command.conf
-#- name: redis-cache-002-dyno
-#  files:
-#  - dynomitedb/dynomite.yaml
-#  - dynomitedb/dynomite.pem
+- name: redis-cache-002-dyno
+  files:
+  - dynomitedb/dynomite.yaml
   
 generatorOptions:
   disableNameSuffixHash: true

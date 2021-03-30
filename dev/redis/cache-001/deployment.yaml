@@ -32,8 +32,6 @@ spec:
           - redis-server
           - "/redis-master/redis.conf"
         env:
-          # - name: ALLOW_EMPTY_PASSWORD
-          #   value: "yes"
           - name: REDIS_PASSWORD
             value: Password12#$
         resources:
@@ -44,15 +42,18 @@ spec:
             cpu: 300m
             memory: 256Mi
         volumeMounts:
-        - name: persistent-storage
+        #- name: persistent-storage
+        #  mountPath: /data
+        - name: shared-storage
           mountPath: /data
-        #- name: shared-storage
-        #  mountPath: /data/bck
         - name: config
           mountPath: /redis-master
       - name: dynomite
-        image: htdp1/dynomite:v8
+        image: dynomitedb/dynomite
         imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
         ports:
           - containerPort: 8101
             name: dyno
@@ -60,12 +61,10 @@ spec:
             name: dyno-client
           - containerPort: 22222
             name: dyno-admin
-        #volumeMounts:
-        #- name: dyno-config
-        #  mountPath: /etc/dynomite
-        #command: ["/entrypoint.sh"]
-        args: ["dynomite", "-c", "/etc/dynomitedb/dynomite-cache-001.yaml"]
-        #args: ["/bin/sh -c dynomite -c /etc/dynomitedb/dynomite.yaml"]
+        volumeMounts:
+        - name: dyno-config
+          mountPath: /etc/dynomitedb/conf
+        args: ["dynomite", "-c", "/etc/dynomitedb/conf/dynomite.yaml"]
         resources:
           limits:
             cpu: 500m
@@ -116,17 +115,18 @@ spec:
       - name: persistent-storage
         persistentVolumeClaim:
           claimName: redis-cache-001
+      - name: shared-storage
+        persistentVolumeClaim:
+          claimName: redis-nfs
       - name: config
         configMap:
           name: redis-cache-001
           items:
           - key: redis.conf
             path: redis.conf
-      #- name: dyno-config
-      #  configMap:
-      #    name: redis-cache-001-dyno
-      #    items:
-      #    - key: dynomite.yaml
-      #      path: dynomite.yaml
-      #    - key: dynomite.pem
-      #      path: dynomite.pem
+      - name: dyno-config
+        configMap:
+          name: redis-cache-001-dyno
+          items:
+          - key: dynomite.yaml
+            path: dynomite.yaml
