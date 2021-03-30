@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: session-dev
+  name: redis-envoy
+  labels:
+    app: redis-envoy
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: redis-envoy
+  template:
+    metadata:
+      labels:
+        app: redis-envoy
+    spec:
+      containers:
+        - name: redis-envoy
+          image: envoyproxy/envoy-dev
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 6380
+            name: redis
+          - containerPort: 8001
+            name: admin
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 200m
+              memory: 256Mi
+          volumeMounts:
+          - name: envoy-config
+            mountPath: /etc/envoy
+      volumes:
+      - name: envoy-config
+        configMap:
+          name: redis-envoy
+          items:
+          - key: envoy.yaml
+            path: envoy.yaml
