@@ -15,9 +15,9 @@ configMapGenerator:
 - name: redis-cache-001
   files:
   - redis.conf
-#- name: redis-cache-001-envoy
-#  files:
-#  - envoy.yaml
+- name: redis-cache-001-envoy
+  files:
+  - envoy/envoy.yaml
 - name: redis-cache-001-dyno
   files:
   - dynomitedb/dynomite.yaml

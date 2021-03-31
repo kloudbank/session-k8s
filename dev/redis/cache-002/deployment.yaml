@@ -72,24 +72,24 @@ spec:
         volumeMounts:
         - name: dyno-config
           mountPath: /etc/dynomitedb/conf
-      #- name: sidecar-proxy
-      #  image: envoyproxy/envoy-dev:latest
-      #  imagePullPolicy: IfNotPresent
-      #  ports:
-      #    - containerPort: 6380
-      #      name: redis
-      #    - containerPort: 8001
-      #      name: admin
-      #  resources:
-      #    limits:
-      #      cpu: 500m
-      #      memory: 512Mi
-      #    requests:
-      #      cpu: 200m
-      #      memory: 256Mi
-      #  volumeMounts:
-      #  - name: envoy-config
-      #    mountPath: /etc/envoy
+      - name: envoy
+        image: envoyproxy/envoy-dev:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6380
+            name: redis
+          - containerPort: 8001
+            name: admin
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - name: envoy-config
+          mountPath: /etc/envoy
       #- name: predixy
       #  image: htdp1/predixy:v2
       #  imagePullPolicy: IfNotPresent
@@ -130,3 +130,9 @@ spec:
           items:
           - key: dynomite.yaml
             path: dynomite.yaml
+      - name: envoy-config
+        configMap:
+          name: redis-cache-002-envoy
+          items:
+          - key: envoy.yaml
+            path: envoy.yaml
