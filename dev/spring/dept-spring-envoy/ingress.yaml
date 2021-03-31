@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dept-spring-envoy
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  rules:
+  - host: htdp1.kubepia.net
+    http:
+      paths:
+      - path: /dept-spring-envoy
+        backend:
+          serviceName: dept-spring-envoy
+          servicePort: 80

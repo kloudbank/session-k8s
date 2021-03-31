@@ -1,0 +1,25 @@
+spring: 
+  session:
+    store-type: redis
+    redis:
+      namespace: "htdp1:session"
+      host: redis-session.session-dev
+      port: 6379
+      password: 
+
+  cache: 
+    type: redis
+    redis:
+      namespace: "htdp1:cache:"
+      ttl: 10 # min
+      host: redis-cache.session-dev
+      port: 6379
+      password:
+      
+  repository: 
+    type: redis
+    redis:
+      namespace: ""
+      host: redis-envoy-common.session-dev
+      port: 6380
+      password:
