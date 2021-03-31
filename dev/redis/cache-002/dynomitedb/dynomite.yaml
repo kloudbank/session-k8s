@@ -4,9 +4,9 @@ dyn_o_mite:
   dyn_listen: 0.0.0.0:8101
   listen: 0.0.0.0:8102
   dyn_seeds:
-  - redis-cache-001:8101:rack1:dc1:0
+  - redis-dyno-001:8101:rack1:dc1:0
   servers:
-  - redis-cache-002:6379:1
+  - redis-dyno-002:6379:1
   tokens: '0'
   data_store: 0
   pem_key_file: /etc/dynomitedb/dynomite.pem

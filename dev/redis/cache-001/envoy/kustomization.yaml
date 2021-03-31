@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: session-dev
 
 bases:
-- ../../../base/redis/cache-001
+- ../../../../base/redis/cache-001/envoy
 
 patchesStrategicMerge:
 - deployment.yaml
@@ -12,9 +12,12 @@ patchesStrategicMerge:
 - multiple-service.yaml
 
 configMapGenerator:
-- name: redis-cache-001
+- name: redis-config
   files:
   - redis.conf
+- name: envoy-config-001
+  files:
+  - envoy.yaml
   
 generatorOptions:
   disableNameSuffixHash: true

@@ -2,13 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: session-dev
-  name: redis-cache-002
+  name: redis-dyno-common
   labels:
-    app: redis-cache-002
+    app: redis-dyno-common
 spec:
   ports:
     - port: 6379
       targetPort: 6379
       name: redis-cache
+    - port: 8102
+      targetPort: 8102
+      name: dyno-client
   selector:
-    app: redis-cache-002
+    component: redis-dyno

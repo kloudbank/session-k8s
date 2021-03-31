@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: session-dev
-  name: redis-cache-002
+  name: redis-envoy-002
   labels:
-    app: redis-cache-002
+    app: redis-envoy-002
 spec:
   replicas: 1
   strategy:
@@ -14,15 +14,16 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: redis-cache-002
+      app: redis-envoy-002
   template:
     metadata:
       labels:
-        app: redis-cache-002
-        component: redis
+        app: redis-envoy-002
+        component: redis-envoy
     spec:
+      #hostNetwork: true
       containers:
-      - name: redis-cache-002
+      - name: redis-envoy-002
         image: redis:latest
         imagePullPolicy: IfNotPresent
         ports:
@@ -45,36 +46,39 @@ spec:
         #  mountPath: /data
         - name: shared-storage
           mountPath: /data
-        - name: config
+        - name: redis-config
           mountPath: /redis-master
-      #- name: predixy
-      #  image: htdp1/predixy:v2
-      #  imagePullPolicy: IfNotPresent
-      #  ports:
-      #    - containerPort: 6380
-      #      name: predixy
-      #  command: 
-      #    - /usr/local/bin/predixy
-      #    - "/etc/predixy/conf/predixy.conf"
-      #  resources:
-      #    limits:
-      #      cpu: 500m
-      #      memory: 512Mi
-      #    requests:
-      #      cpu: 200m
-      #      memory: 256Mi
-      #  volumeMounts:
-      #  - name: predixy-config
-      #    mountPath: /etc/predixy/conf
-      #  - name: shared-storage
-      #    mountPath: /data
+      - name: envoy
+        image: envoyproxy/envoy-dev:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6380
+            name: envoy
+          - containerPort: 8001
+            name: admin
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        volumeMounts:
+        - name: envoy-config
+          mountPath: /etc/envoy
       volumes:
       - name: shared-storage
         persistentVolumeClaim:
-          claimName: redis-nfs
-      - name: config
+          claimName: redis-envoy-nfs
+      - name: redis-config
         configMap:
-          name: redis-cache-002
+          name: redis-config
           items:
           - key: redis.conf
             path: redis.conf
+      - name: envoy-config
+        configMap:
+          name: envoy-config-002
+          items:
+          - key: envoy.yaml
+            path: envoy.yaml

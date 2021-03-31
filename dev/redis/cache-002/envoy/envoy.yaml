@@ -18,41 +18,41 @@ static_resources:
           "@type": type.googleapis.com/envoy.extensions.filters.network.redis_proxy.v3.RedisProxy
           prefix_routes:
             routes:
-            - cluster: redis-cache-002
+            - cluster: redis-envoy-002
               prefix: ""
               request_mirror_policy:
-                - cluster: redis-cache-001
+                - cluster: redis-envoy-001
                   exclude_read_commands: true
           stat_prefix: egress_redis
           settings:
             op_timeout: 5s
             enable_redirection: true
   clusters:
-  - name: redis-cache-001
+  - name: redis-envoy-001
     connect_timeout: 0.25s
     type: STRICT_DNS
     lb_policy: MAGLEV
     load_assignment:
-      cluster_name: redis-cache-001
+      cluster_name: redis-envoy-001
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: redis-cache-001
+                address: redis-envoy-001
                 port_value: 6379
-  - name: redis-cache-002
+  - name: redis-envoy-002
     connect_timeout: 0.25s
     type: STRICT_DNS
     lb_policy: MAGLEV
     load_assignment:
-      cluster_name: redis-cache-002
+      cluster_name: redis-envoy-002
       endpoints:
       - lb_endpoints:
         - endpoint:
             address:
               socket_address:
-                address: redis-cache-002
+                address: redis-envoy-002
                 port_value: 6379
     #cluster_type:
     #  name: envoy.clusters.redis

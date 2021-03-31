@@ -2,11 +2,11 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: session-dev
-  name: redis-cache-001
+  name: redis-nfs
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: ebs-sc
+    - ReadWriteMany
+  storageClassName: efs-sc
   resources:
     requests:
       storage: 4Gi

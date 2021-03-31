@@ -20,6 +20,6 @@ spring:
     type: redis
     redis:
       namespace: ""
-      host: redis-common.session-dev
-      port: 6380
+      host: redis-cache.session-dev
+      port: 6379
       password:

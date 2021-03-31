@@ -10,11 +10,5 @@ spec:
     - port: 6379
       targetPort: 6379
       name: redis-cache
-    - port: 6380
-      targetPort: 6380
-      name: envoy
-    - port: 8102
-      targetPort: 8102
-      name: dyno-client
   selector:
     component: redis

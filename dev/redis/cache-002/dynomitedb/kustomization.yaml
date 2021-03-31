@@ -4,17 +4,19 @@ kind: Kustomization
 namespace: session-dev
 
 bases:
-- ../../../base/redis/cache-001
+- ../../../../base/redis/cache-002/dynomitedb
 
 patchesStrategicMerge:
 - deployment.yaml
 - service.yaml
-- multiple-service.yaml
 
 configMapGenerator:
-- name: redis-cache-001
+- name: redis-config
   files:
   - redis.conf
+- name: dyno-config-002
+  files:
+  - dynomite.yaml
   
 generatorOptions:
   disableNameSuffixHash: true

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: session-dev
+  name: redis-envoy-common
+  labels:
+    app: redis-envoy-common
+spec:
+  # type: LoadBalancer
+  # loadBalancerIP: 192.168.0.79
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    #app: redis-cache
+    component: redis-envoy

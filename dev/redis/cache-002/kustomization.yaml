@@ -15,12 +15,6 @@ configMapGenerator:
 - name: redis-cache-002
   files:
   - redis.conf
-- name: redis-cache-002-envoy
-  files:
-  - envoy/envoy.yaml
-- name: redis-cache-002-dyno
-  files:
-  - dynomitedb/dynomite.yaml
   
 generatorOptions:
   disableNameSuffixHash: true

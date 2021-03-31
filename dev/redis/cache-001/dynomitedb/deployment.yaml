@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: session-dev
+  name: redis-dyno-001
+  labels:
+    app: redis-dyno-001
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: redis-dyno-001
+  template:
+    metadata:
+      labels:
+        app: redis-dyno-001
+        component: redis-dyno
+    spec:
+      #hostNetwork: true
+      containers:
+      - name: redis-dyno-001
+        image: redis:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 6379
+        command: 
+          - redis-server
+          - "/redis-master/redis.conf"
+        env:
+          - name: REDIS_PASSWORD
+            value: Password12#$
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
+        volumeMounts:
+        #- name: persistent-storage
+        #  mountPath: /data
+        - name: shared-storage
+          mountPath: /data
+        - name: redis-config
+          mountPath: /redis-master
+      - name: dynomite
+        image: dynomitedb/dynomite
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsUser: 999
+          runAsGroup: 999
+        ports:
+          - containerPort: 8101
+            name: dyno
+          - containerPort: 8102
+            name: dyno-client
+          - containerPort: 22222
+            name: dyno-admin
+        args: ["dynomite", "-c", "/etc/dynomitedb/conf/dynomite.yaml"]
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 300m
+            memory: 256Mi
+        volumeMounts:
+        - name: dyno-config
+          mountPath: /etc/dynomitedb/conf
+      volumes:
+      - name: shared-storage
+        persistentVolumeClaim:
+          claimName: redis-dyno-nfs
+      - name: redis-config
+        configMap:
+          name: redis-config
+          items:
+          - key: redis.conf
+            path: redis.conf
+      - name: dyno-config
+        configMap:
+          name: dyno-config-001
+          items:
+          - key: dynomite.yaml
+            path: dynomite.yaml

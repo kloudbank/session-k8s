@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: session-dev
-  name: redis-nfs
+  name: redis-envoy-nfs
 spec:
   accessModes:
     - ReadWriteMany
