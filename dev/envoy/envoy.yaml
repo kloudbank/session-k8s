@@ -19,22 +19,15 @@ static_resources:
           prefix_routes:
             routes:
             - cluster: redis-cache
-              prefix: ""
+              prefix: "a"
               request_mirror_policy:
                 - cluster: redis-cache-001
                   exclude_read_commands: true
+            - cluster: redis-cache
+              prefix: "b"
+              request_mirror_policy:
                 - cluster: redis-cache-002
                   exclude_read_commands: true
-            #- cluster: redis-cache-001
-            #  prefix: "a"
-            #  request_mirror_policy:
-            #    cluster: redis-cache-002
-            #    exclude_read_commands: true
-            #- cluster: redis-cache-002
-            #  prefix: "b"
-            #  request_mirror_policy:
-            #    cluster: redis-cache-001
-            #    exclude_read_commands: true
           stat_prefix: egress_redis
           settings:
             op_timeout: 5s
