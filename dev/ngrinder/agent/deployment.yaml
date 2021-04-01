@@ -27,13 +27,13 @@ spec:
             cpu: 500m
             memory: 512Mi
         args: [ngrinder-controller.session-dev.svc.cluster.local:80]
-        volumeMounts:
-        - name: persistent-storage
-          mountPath: /opt/ngrinder-agent1
-      volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: ngrinder-agent
+      #  volumeMounts:
+      #  - name: persistent-storage
+      #    mountPath: /opt/ngrinder-agent1
+      #volumes:
+      #- name: persistent-storage
+      #  persistentVolumeClaim:
+      #    claimName: ngrinder-agent
 
 ---
 
@@ -66,10 +66,10 @@ spec:
             cpu: 500m
             memory: 512Mi
         args: [ngrinder-controller.session-dev.svc.cluster.local:80]
-        volumeMounts:
-        - name: persistent-storage
-          mountPath: /opt/ngrinder-agent2
-      volumes:
-      - name: persistent-storage
-        persistentVolumeClaim:
-          claimName: ngrinder-agent
+      #  volumeMounts:
+      #  - name: persistent-storage
+      #    mountPath: /opt/ngrinder-agent2
+      #volumes:
+      #- name: persistent-storage
+      #  persistentVolumeClaim:
+      #    claimName: ngrinder-agent
